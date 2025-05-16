@@ -234,12 +234,20 @@ function triggerBSOD() {
 
 if (window.innerWidth > 768) {
   let z = 100;
-  document.querySelectorAll('.window').forEach(win => {
+  document.querySelectorAll('.window').forEach((win, i) => {
     const bar = win.querySelector('.title-bar');
     bar.style.cursor = 'move';
     let offset = [0, 0];
     let isDown = false;
 
+    // Random initial position
+    const randX = Math.floor(Math.random() * (window.innerWidth - 320));
+    const randY = Math.floor(Math.random() * (window.innerHeight - 240));
+    win.style.left = randX + 'px';
+    win.style.top = randY + 'px';
+    win.style.zIndex = ++z;
+
+    // Dragging logic
     bar.addEventListener('mousedown', e => {
       isDown = true;
       offset = [win.offsetLeft - e.clientX, win.offsetTop - e.clientY];
@@ -255,6 +263,7 @@ if (window.innerWidth > 768) {
   });
 }
 </script>
+
 
 
 </body>
