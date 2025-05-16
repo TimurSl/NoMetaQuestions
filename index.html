@@ -10,18 +10,15 @@
     body {
       font-family: sans-serif;
       background-color: #008080;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      align-items: center;
       padding: 2rem;
-      gap: 1rem;
-      height: 100vh;
       margin: 0;
+      position: relative;
+      overflow: hidden;
     }
     .window {
       min-width: 300px;
       max-width: 400px;
+      position: absolute;
     }
     .window.big {
       width: 600px;
@@ -78,7 +75,7 @@
   </div>
 </div>
 
-<div class="window big">
+<div class="window big" style="top: 50px; left: 50px;">
   <div class="title-bar">
     <div class="title-bar-text">What is a Meta Question?</div>
   </div>
@@ -93,16 +90,16 @@
   </div>
 </div>
 
-<div class="window">
+<div class="window" style="top: 100px; left: 700px;">
   <div class="title-bar">
     <div class="title-bar-text">Quiz: How do you wanna ask?</div>
   </div>
   <div class="window-body">
     <p><strong>How do you wanna ask that man about your problem?</strong></p>
     <div class="quiz">
-      <button onclick="document.getElementById('bsod').style.display='flex'">“Can I ask something?”</button>
-      <button onclick="document.getElementById('bsod').style.display='flex'">“I hope I’m allowed to ask this…”</button>
-      <button onclick="document.getElementById('bsod').style.display='flex'">“Would anyone mind if I ask…”</button>
+      <button onclick="triggerBSOD()">“Can I ask something?”</button>
+      <button onclick="triggerBSOD()">“I hope I’m allowed to ask this…”</button>
+      <button onclick="triggerBSOD()">“Would anyone mind if I ask…”</button>
       <button onclick="alert('Correct! You asked directly.')">“How do I fix this bug in my project?”</button>
     </div>
   </div>
@@ -206,28 +203,31 @@
 
 
 <script>
-  document.querySelectorAll('.window').forEach(win => {
-    const bar = win.querySelector('.title-bar');
-    let isDown = false, offset = [0, 0];
+function triggerBSOD() {
+  document.getElementById('bsod').style.display = 'flex';
+}
 
-    bar.style.cursor = 'move';
-    bar.addEventListener('mousedown', e => {
-      isDown = true;
-      offset = [
-        win.offsetLeft - e.clientX,
-        win.offsetTop - e.clientY
-      ];
-    });
+// make all windows draggable and bring to top
+let z = 100;
+document.querySelectorAll('.window').forEach(win => {
+  const bar = win.querySelector('.title-bar');
+  bar.style.cursor = 'move';
+  let offset = [0, 0];
+  let isDown = false;
 
-    document.addEventListener('mouseup', () => isDown = false);
-    document.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      win.style.position = 'absolute';
-      win.style.left = (e.clientX + offset[0]) + 'px';
-      win.style.top = (e.clientY + offset[1]) + 'px';
-      win.style.zIndex = Date.now(); // bring to front
-    });
+  bar.addEventListener('mousedown', e => {
+    isDown = true;
+    offset = [win.offsetLeft - e.clientX, win.offsetTop - e.clientY];
+    win.style.zIndex = ++z;
   });
+
+  document.addEventListener('mouseup', () => isDown = false);
+  document.addEventListener('mousemove', e => {
+    if (!isDown) return;
+    win.style.left = (e.clientX + offset[0]) + 'px';
+    win.style.top = (e.clientY + offset[1]) + 'px';
+  });
+});
 </script>
 
 
