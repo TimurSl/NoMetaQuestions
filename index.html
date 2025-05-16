@@ -158,5 +158,32 @@
     </div>
   </div>
 
+
+<script>
+  document.querySelectorAll('.window').forEach(win => {
+    const bar = win.querySelector('.title-bar');
+    let isDown = false, offset = [0, 0];
+
+    bar.style.cursor = 'move';
+    bar.addEventListener('mousedown', e => {
+      isDown = true;
+      offset = [
+        win.offsetLeft - e.clientX,
+        win.offsetTop - e.clientY
+      ];
+    });
+
+    document.addEventListener('mouseup', () => isDown = false);
+    document.addEventListener('mousemove', e => {
+      if (!isDown) return;
+      win.style.position = 'absolute';
+      win.style.left = (e.clientX + offset[0]) + 'px';
+      win.style.top = (e.clientY + offset[1]) + 'px';
+      win.style.zIndex = Date.now(); // bring to front
+    });
+  });
+</script>
+
+
 </body>
 </html>
