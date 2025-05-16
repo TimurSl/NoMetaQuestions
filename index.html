@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="description" content="Personal bio and why meta questions suck">
+  <meta name="description" content="why meta questions suck">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>#NOMETA</title>
+  <title>no meta pls</title>
   <link rel="stylesheet" href="https://unpkg.com/98.css">
   <style>
     body {
       font-family: sans-serif;
-      background-color: #008080; /* Win98 teal blue background */
+      background-color: #008080;
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
@@ -43,24 +43,70 @@
       display: block;
       margin-bottom: 0.25rem;
     }
+    .quiz button {
+      display: block;
+      margin: 0.25rem 0;
+      width: 100%;
+    }
+    #bsod {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #0000aa;
+      color: #ffffff;
+      font-family: monospace;
+      font-size: 1.2rem;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      z-index: 9999;
+      padding: 2rem;
+    }
   </style>
 </head>
 <body>
 
-  <div class="window big">
-    <div class="title-bar">
-      <div class="title-bar-text">What is a Meta Question?</div>
-    </div>
-    <div class="window-body">
-      <p>A meta question is a question *about* asking a question. Instead of being direct, people ask nonsense like:</p>
-      <ul>
-        <li>“Can I ask something?”</li>
-        <li>“Is it okay to talk about X?”</li>
-        <li>“Would it be alright if I…”</li>
-      </ul>
-      <p>These waste time, confuse people, and don't add value. Just ask your question directly. Simple as that.</p>
+<div id="bsod">
+  <div>
+    <p>A fatal exception 0x0META occurred at 0xBADC0DE in module ASK.EXE.<br>
+    The system has been shut down to prevent damage from dumb questions.</p>
+    <p>Press CTRL+ALT+DEL to restart your brain.<br>
+    Or just refresh the page.</p>
+  </div>
+</div>
+
+<div class="window big">
+  <div class="title-bar">
+    <div class="title-bar-text">What is a Meta Question?</div>
+  </div>
+  <div class="window-body">
+    <p>A meta question is a question *about* asking a question. Instead of being direct, people ask nonsense like:</p>
+    <ul>
+      <li>“Can I ask something?”</li>
+      <li>“Is it okay to talk about X?”</li>
+      <li>“Would it be alright if I…”</li>
+    </ul>
+    <p>These waste time, confuse people, and don't add value. Just ask your question directly. Simple as that.</p>
+  </div>
+</div>
+
+<div class="window">
+  <div class="title-bar">
+    <div class="title-bar-text">Quiz: How do you wanna ask?</div>
+  </div>
+  <div class="window-body">
+    <p><strong>How do you wanna ask that man about your problem?</strong></p>
+    <div class="quiz">
+      <button onclick="document.getElementById('bsod').style.display='flex'">“Can I ask something?”</button>
+      <button onclick="document.getElementById('bsod').style.display='flex'">“I hope I’m allowed to ask this…”</button>
+      <button onclick="document.getElementById('bsod').style.display='flex'">“Would anyone mind if I ask…”</button>
+      <button onclick="alert('Correct! You asked directly.')">“How do I fix this bug in my project?”</button>
     </div>
   </div>
+</div>
 
   <div class="window">
     <div class="title-bar">
